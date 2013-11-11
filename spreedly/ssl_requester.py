@@ -44,11 +44,11 @@ def handle_response(response, return_raw):
     if 200 <= response.status_code <= 300:
         return response.text if return_raw else xml_doc(response)
     elif response.status_code == 401:
-        raise AuthenticationError
+        raise AuthenticationError(xml_doc(response))
     elif response.status_code == 404:
         raise NotFoundError
     elif response.status_code == 402:
-        raise PaymentRequiredError
+        raise PaymentRequiredError(xml_doc(response))
     elif response.status_code == 422:
         if xml_doc(response).xpath('.//errors/error'):
             raise TransactionCreationError(xml_doc(response))
