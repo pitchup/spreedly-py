@@ -1,5 +1,4 @@
-base_url = "http://localhost:8000"
-
+base_url = "https://core.spreedly.com"
 
 def find_payment_method_url(token):
     return "%(base_url)s/v1/payment_methods/%(token)s.xml" % {'base_url': base_url, 'token': token}
