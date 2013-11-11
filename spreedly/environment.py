@@ -13,7 +13,7 @@ class Environment(object):
         options = options or {}
 
         self.key = environment_key
-        self.access_secret = environment_key, access_secret
+        self.access_secret = access_secret
         self.base_url = options.get('base_url', 'https://core.spreedly.com')
         self.currency_code = options.get('currency_code', 'USD')
         self.headers = self._init_headers()
