@@ -57,7 +57,7 @@ class Environment(object):
     def add_credit_card(self, card_details):
         credit_card = self.credit_card_body(card_details)
 
-        return self.api_post(urls.add_gateway_url(), credit_card, False)
+        return self.api_post(urls.add_payment_method_url(), credit_card, False)
 
     def credit_card_body(self, options):
         payment_method = etree.Element('payment_method')
