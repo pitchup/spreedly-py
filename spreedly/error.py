@@ -2,7 +2,7 @@ import spreedly.common.error_parser as ep
 
 class XmlErrorList(Exception):
     def __init__(self, xml_doc):
-        ep.errors_from()
+        ep.errors_from(xml_doc)
 
 
 class AuthenticationError(XmlErrorList):

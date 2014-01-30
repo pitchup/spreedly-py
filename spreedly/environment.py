@@ -37,6 +37,7 @@ class Environment(object):
         return Gateway(xml_doc)
 
     def purchase_on_gateway(self, gateway_token, payment_method_token, amount, options=None):
+        options = options or {}
         auth_purchase = self.auth_purchase_body(amount, payment_method_token, options)
 
         return self.api_post(urls.purchase_url(gateway_token), auth_purchase)
@@ -50,7 +51,7 @@ class Environment(object):
             )
         )
 
-        self.add_to_doc(auth_purchase, options)
+        self.add_extra_options_for_basic_ops(auth_purchase, options)
 
         return auth_purchase
 
@@ -95,7 +96,12 @@ class Environment(object):
         for k in attributes:
             if k in options:
                 element = etree.SubElement(xml_doc, k)
+                print k, options[k]
                 element.text = options[k]
+
+    def add_extra_options_for_basic_ops(self, doc, options):
+        self.add_to_doc(doc, options,
+                        ['order_id', 'description', 'ip', 'merchant_name_descriptor', 'merchant_location_descriptor'])
 
     def api_post(self, url, body, talking_to_gateway=True):
         xml_doc = ssl_requester.ssl_post(url, body, self.headers, talking_to_gateway)
