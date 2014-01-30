@@ -5,7 +5,7 @@ setup(
     version='0.1.0',
     author='M. Codona',
     author_email='mike@pitchup.com',
-    packages=['spreedly'],
+    packages=['spreedly', 'spreedly.payment_methods', 'spreedly.transactions', 'spreedly.common'],
     description='Python port of spreedly-gem.',
     long_description=open('README.md').read(),
     install_requires=[
@@ -13,3 +13,5 @@ setup(
         "lxml==3.2.1",
     ],
 )
+
+
