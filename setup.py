@@ -10,5 +10,6 @@ setup(
     long_description=open('README.md').read(),
     install_requires=[
         "requests==1.2.3",
+        "lxml==3.2.1",
     ],
 )
