@@ -13,6 +13,7 @@ class Transaction(Model):
         from purchase import Purchase
         from retain_payment_method import RetainPaymentMethod
         from redact_payment_method import RedactPaymentMethod
+        from redact_gateway import RedactGateway
 
         transaction_type = xml_doc.xpath('.//transaction_type')[0].text
 

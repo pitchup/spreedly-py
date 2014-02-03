@@ -42,6 +42,23 @@ class Environment(object):
 
         return self.api_post(urls.purchase_url(gateway_token), auth_purchase)
 
+    def redact_payment_method(self, payment_method_token, options=None):
+        options = options or {}
+
+        body = self.redact_payment_method_body(options)
+        xml_doc = ssl_requester.ssl_put(urls.redact_payment_method_url(payment_method_token), body, self.headers)
+        return Transaction.from_xml(xml_doc)
+
+    def redact_payment_method_body(self, options):
+        redact_payment_method = None
+
+        if options:
+            redact_payment_method = etree.Element('transaction')
+            self.add_to_doc(redact_payment_method, options, ('remove_from_gateway',))
+
+        return redact_payment_method
+
+
     def auth_purchase_body(self, amount, payment_method_token, options):
         auth_purchase = (
             E.transaction(
@@ -88,6 +105,12 @@ class Environment(object):
         self.add_to_doc(gateway, credentials)
         
         return gateway
+
+    def redact_gateway(self, gateway_token, options=None):
+        options = options or {}
+
+        xml_doc = ssl_requester.ssl_put(urls.redact_gateway_url(gateway_token), '', self.headers)
+        return Transaction.from_xml(xml_doc)
 
     def add_to_doc(self, xml_doc, options, attributes=None):
         if not attributes:
