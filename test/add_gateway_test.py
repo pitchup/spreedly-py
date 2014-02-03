@@ -20,7 +20,7 @@ class TestAddGateway(unittest.TestCase):
         self.assertEqual("test", gateway.gateway_type)
         self.assertEqual("retained", gateway.state)
         self.assertEqual("Test", gateway.name)
-        self.assertEqual([], gateway.credentials)
+        self.assertEqual({'login': 'test-login'}, gateway.credentials)
 
     def test_request_body_params(self):
         body = self.environment.add_gateway_body('wirecard', {
@@ -55,6 +55,12 @@ successful_add_test_gateway_response = """
           <supports_store type="boolean">true</supports_store>
           <supports_remove type="boolean">true</supports_remove>
         </characteristics>
+        <credentials>
+          <credential>
+          <name>login</name>
+          <value>test-login</value>
+        </credential>
+        </credentials>
         <state>retained</state>
         <payment_methods>
           <payment_method>credit_card</payment_method>
