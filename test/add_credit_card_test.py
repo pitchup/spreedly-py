@@ -34,7 +34,6 @@ class TestAddCreditCard(unittest.TestCase):
 
         body = self.environment.credit_card_body(full_card_details).xpath('/payment_method')[0]
 
-
         self.assertEqual(body.xpath('./data')[0].text, 'talent: Late')
         self.assertEqual(body.xpath('./email')[0].text, 'leavenworth@free.com')
         self.assertEqual(body.xpath('./retained')[0].text, 'true')
