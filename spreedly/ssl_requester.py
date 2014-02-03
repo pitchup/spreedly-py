@@ -27,7 +27,12 @@ def _ssl_request(method, endpoint, body, headers, options=None):
     options = options or {}
     options.update({'taking_to_gateway': False, 'return_raw': False})
 
-    response = raw_ssl_request(method, endpoint, etree.tostring(body), headers)
+    if body:
+        body_str = etree.tostring(body)
+    else:
+        body_str = ''
+
+    response = raw_ssl_request(method, endpoint, body_str, headers)
     show_raw_response(response.status_code, response.text)
 
     return handle_response(response, options['return_raw'])
