@@ -9,7 +9,7 @@ class Gateway(Model):
 
     def __init__(self, xml_doc):
         super(Gateway, self).__init__(xml_doc)
-        self.credentials = []
+        self.credentials = {}
         self._init_credentials(xml_doc)
 
     @classmethod
