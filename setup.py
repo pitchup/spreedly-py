@@ -9,7 +9,7 @@ setup(
     description='Python port of spreedly-gem.',
     long_description=open('README.md').read(),
     install_requires=[
-        "requests==1.2.3",
+        "requests==2.20.0",
         "lxml==3.2.1",
     ],
 )
